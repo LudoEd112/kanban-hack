@@ -37,6 +37,7 @@ public class BoardController {
     }
 
     @GetMapping
+    @Operation(summary = "Boards", description = "Get all boards")
     public List<BoardVM> list() {
         List<Board> boards = boardService.listBoards();
 

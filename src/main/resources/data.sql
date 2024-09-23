@@ -1,7 +1,7 @@
-insert into user (name) values ('Dima');
-insert into user (name) values ('Andrey');
-insert into user (name) values ('Artem');
-insert into user (name) values ('Nadya');
+insert into user (id, username, password, name) values (1, 'LudoEd112', 'dimon', 'Dima');
+insert into user (id, username, password, name) values (2, 'Risunya', 'andrey', 'Andrey');
+insert into user (id, username, password, name) values (3, 'Koto_Vi', 'artem', 'Artem');
+insert into user (id, username, password, name) values (4, 'Nadi', 'nadya', 'Nadya');
 
 insert into board (title) values ('Win hackathon');
 insert into board (title) values ('Trip to Moscow');
