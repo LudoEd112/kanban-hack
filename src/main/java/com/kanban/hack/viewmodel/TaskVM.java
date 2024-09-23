@@ -1,6 +1,6 @@
-package com.kanban.kanban.viewmodel;
+package com.kanban.hack.viewmodel;
 
-import com.kanban.kanban.model.Status;
+import com.kanban.hack.model.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

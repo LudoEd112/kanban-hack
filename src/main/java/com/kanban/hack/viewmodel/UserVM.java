@@ -1,21 +1,16 @@
-package com.kanban.kanban.viewmodel;
+package com.kanban.hack.viewmodel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SprintVM {
+public class UserVM {
 
     private Long id;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private Long boardId;
-
+    private String name;
 }

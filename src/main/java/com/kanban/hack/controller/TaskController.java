@@ -1,9 +1,9 @@
-package com.kanban.kanban.controller;
+package com.kanban.hack.controller;
 
-import com.kanban.kanban.model.Status;
-import com.kanban.kanban.model.Task;
-import com.kanban.kanban.service.TaskService;
-import com.kanban.kanban.viewmodel.TaskVM;
+import com.kanban.hack.model.Status;
+import com.kanban.hack.model.Task;
+import com.kanban.hack.service.TaskService;
+import com.kanban.hack.viewmodel.TaskVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

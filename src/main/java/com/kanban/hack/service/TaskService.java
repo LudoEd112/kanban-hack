@@ -1,15 +1,15 @@
-package com.kanban.kanban.service;
+package com.kanban.hack.service;
 
-import com.kanban.kanban.model.Board;
-import com.kanban.kanban.model.Sprint;
-import com.kanban.kanban.model.Status;
-import com.kanban.kanban.model.Task;
-import com.kanban.kanban.model.User;
-import com.kanban.kanban.repository.BoardRepository;
-import com.kanban.kanban.repository.SprintRepository;
-import com.kanban.kanban.repository.TaskRepository;
-import com.kanban.kanban.repository.UserRepository;
-import com.kanban.kanban.viewmodel.TaskVM;
+import com.kanban.hack.model.Board;
+import com.kanban.hack.model.Sprint;
+import com.kanban.hack.model.Status;
+import com.kanban.hack.model.Task;
+import com.kanban.hack.model.User;
+import com.kanban.hack.repository.BoardRepository;
+import com.kanban.hack.repository.SprintRepository;
+import com.kanban.hack.repository.TaskRepository;
+import com.kanban.hack.repository.UserRepository;
+import com.kanban.hack.viewmodel.TaskVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,6 @@ public class TaskService {
         taskToSave.setTitle(taskVM.getTitle());
         taskToSave.setDate(taskVM.getDate());
         taskToSave.setStatus(taskVM.getStatus());
-        taskToSave.setColor(taskVM.getColor());
 
         Board savedBoard = boardRepository.findById(taskVM.getBoardId()).get();
         taskToSave.setBoard(savedBoard);

@@ -1,4 +1,4 @@
-package com.kanban.kanban.model;
+package com.kanban.hack.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

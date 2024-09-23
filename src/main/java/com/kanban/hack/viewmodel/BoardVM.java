@@ -1,4 +1,4 @@
-package com.kanban.kanban.viewmodel;
+package com.kanban.hack.viewmodel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

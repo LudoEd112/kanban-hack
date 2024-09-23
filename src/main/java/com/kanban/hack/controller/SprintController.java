@@ -1,8 +1,8 @@
-package com.kanban.kanban.controller;
+package com.kanban.hack.controller;
 
-import com.kanban.kanban.model.Sprint;
-import com.kanban.kanban.service.SprintService;
-import com.kanban.kanban.viewmodel.SprintVM;
+import com.kanban.hack.model.Sprint;
+import com.kanban.hack.service.SprintService;
+import com.kanban.hack.viewmodel.SprintVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

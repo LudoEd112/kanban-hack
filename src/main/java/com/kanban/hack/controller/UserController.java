@@ -1,7 +1,7 @@
-package com.kanban.kanban.controller;
+package com.kanban.hack.controller;
 
-import com.kanban.kanban.service.UserService;
-import com.kanban.kanban.viewmodel.UserVM;
+import com.kanban.hack.service.UserService;
+import com.kanban.hack.viewmodel.UserVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

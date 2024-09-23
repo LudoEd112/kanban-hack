@@ -1,6 +1,6 @@
-package com.kanban.kanban.repository;
+package com.kanban.hack.repository;
 
-import com.kanban.kanban.model.Board;
+import com.kanban.hack.model.Board;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

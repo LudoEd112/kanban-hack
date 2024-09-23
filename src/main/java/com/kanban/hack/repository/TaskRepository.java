@@ -1,7 +1,7 @@
-package com.kanban.kanban.repository;
+package com.kanban.hack.repository;
 
-import com.kanban.kanban.model.Status;
-import com.kanban.kanban.model.Task;
+import com.kanban.hack.model.Status;
+import com.kanban.hack.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

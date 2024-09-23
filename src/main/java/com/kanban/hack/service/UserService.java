@@ -1,8 +1,8 @@
-package com.kanban.kanban.service;
+package com.kanban.hack.service;
 
-import com.kanban.kanban.model.User;
-import com.kanban.kanban.repository.UserRepository;
-import com.kanban.kanban.viewmodel.UserVM;
+import com.kanban.hack.model.User;
+import com.kanban.hack.repository.UserRepository;
+import com.kanban.hack.viewmodel.UserVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

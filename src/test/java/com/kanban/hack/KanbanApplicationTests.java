@@ -1,4 +1,4 @@
-package com.kanban.kanban;
+package com.kanban.hack;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

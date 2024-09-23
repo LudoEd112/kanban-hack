@@ -1,11 +1,13 @@
-package com.kanban.kanban.controller;
+package com.kanban.hack.controller;
 
-import com.kanban.kanban.model.Board;
-import com.kanban.kanban.model.Task;
-import com.kanban.kanban.service.BoardService;
-import com.kanban.kanban.service.TaskService;
-import com.kanban.kanban.viewmodel.BoardVM;
-import com.kanban.kanban.viewmodel.TaskVM;
+import com.kanban.hack.model.Board;
+import com.kanban.hack.model.Task;
+import com.kanban.hack.service.BoardService;
+import com.kanban.hack.service.TaskService;
+import com.kanban.hack.viewmodel.BoardVM;
+import com.kanban.hack.viewmodel.TaskVM;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/v1/boards")
+@Tag(name = "Boards", description = "Boards API")
 public class BoardController {
 
     @Autowired
@@ -28,6 +31,7 @@ public class BoardController {
     private TaskService taskService;
 
     @PostMapping
+    @Operation(summary = "Create new board", description = "Creating new board")
     public void create(@RequestBody BoardVM boardVM) {
         boardService.create(boardVM);
     }
@@ -61,6 +65,7 @@ public class BoardController {
     }*/
 
     @GetMapping("/{boardId}/backlog")
+    @Operation(summary = "list tasks", description = "list tasks by boardId")
     public List<TaskVM> listByTask(@PathVariable Long boardId) {
         List<Task> tasks = taskService.listByBoard(boardId);
 

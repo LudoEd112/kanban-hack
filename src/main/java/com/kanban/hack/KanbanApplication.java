@@ -1,4 +1,4 @@
-package com.kanban.kanban;
+package com.kanban.hack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

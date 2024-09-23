@@ -1,15 +1,13 @@
-package com.kanban.kanban.service;
+package com.kanban.hack.service;
 
-import com.kanban.kanban.model.Board;
-import com.kanban.kanban.model.Sprint;
-import com.kanban.kanban.repository.BoardRepository;
-import com.kanban.kanban.repository.SprintRepository;
-import com.kanban.kanban.viewmodel.SprintVM;
+import com.kanban.hack.model.Board;
+import com.kanban.hack.model.Sprint;
+import com.kanban.hack.repository.BoardRepository;
+import com.kanban.hack.repository.SprintRepository;
+import com.kanban.hack.viewmodel.SprintVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
