@@ -1,7 +1,7 @@
-insert into user (id, username, password, name) values (1, 'LudoEd112', 'dimon', 'Dima');
-insert into user (id, username, password, name) values (2, 'Risunya', 'andrey', 'Andrey');
-insert into user (id, username, password, name) values (3, 'Koto_Vi', 'artem', 'Artem');
-insert into user (id, username, password, name) values (4, 'Nadi', 'nadya', 'Nadya');
+insert into users (id, username, password, email) values (1, 'LudoEd112', 'dimon', 'Dima@gmail.com');
+insert into users (id, username, password, email) values (2, 'Risunya', 'andrey', 'Andrey@gmail.com');
+insert into users (id, username, password, email) values (3, 'Koto_Vi', 'artem', 'Artem@gmail.com');
+insert into users (id, username, password, email) values (4, 'Nadi', 'nadya', 'Nadya@gmail.com');
 
 insert into board (title) values ('Win hackathon');
 insert into board (title) values ('Trip to Moscow');

@@ -1,3 +1,4 @@
+/*
 package com.kanban.hack.service;
 
 import com.kanban.hack.model.User;
@@ -6,7 +7,6 @@ import com.kanban.hack.viewmodel.UserVM;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,6 @@ public class UserService {
 
     public void create(UserVM userVM) {
         User userToSave = new User();
-        userToSave.setName(userVM.getName());
         userToSave.setUsername(userVM.getUsername());
         userToSave.setPassword(userVM.getPassword());
         userToSave.setId(userVM.getId());
@@ -36,7 +35,7 @@ public class UserService {
     private static final String JWT_SECRET = "your_secret_key"; // Замените на ваш секретный ключ
 
     public boolean login(String username, String password) {
-        User user = userRepository.findByUsername(username)
+        User user = userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Сравниваем  закодированный  пароль  с  паролем  из  базы  данных
@@ -62,3 +61,4 @@ public class UserService {
                 .compact();
     }
 }
+*/
