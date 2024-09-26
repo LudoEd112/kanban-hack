@@ -45,7 +45,7 @@ public class TaskController {
             taskVM.setStatus(task.getStatus());
             taskVM.setBoardId(task.getBoard().getId());
             taskVM.setSprintId(task.getSprint().getId());
-            taskVM.setOwnerId(task.getOwner().getId());
+            //taskVM.setOwnerId(task.getOwner().getId());
             return taskVM;
         }).collect(Collectors.toList());
 

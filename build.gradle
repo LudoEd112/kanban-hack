@@ -38,7 +38,7 @@ dependencies {
 	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'com.h2database:h2:2.2.224'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

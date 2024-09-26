@@ -27,6 +27,14 @@ public class SecurityConfig {
 
    // private final UserDetailsService userDetailsService;
 //    private final UserDetailsImpl userDetailsService;
+   private static final String[] AUTH_WHITE_LIST = {
+           "/swagger-ui/**",
+           "/swagger-resources/**",
+           "/h2/**",
+           "/console/**",
+           "/v1/auth/**",
+           "/swagger-ui.html"
+   };
 
     private TokenFilter tokenFilter;
     private UserServiceCustom userServiceCustom;
@@ -80,7 +88,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/v1/auth/**").permitAll()
+                        .requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .requestMatchers("/v1/secured/user").fullyAuthenticated()
                         .anyRequest().permitAll()
                 )
