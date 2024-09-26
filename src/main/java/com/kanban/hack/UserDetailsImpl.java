@@ -17,8 +17,8 @@ public class UserDetailsImpl implements UserDetails {
     //private final UserRepository userRepository;
     private Long id;
     private String username;
-    private String email;
     private String password;
+    private String email;
 
     public static UserDetailsImpl build(User user){
         return new UserDetailsImpl(
@@ -40,7 +40,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of();
     }
 
     @Override

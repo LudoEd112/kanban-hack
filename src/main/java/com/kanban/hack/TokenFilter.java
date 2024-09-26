@@ -37,7 +37,8 @@ public class TokenFilter extends OncePerRequestFilter {
                 try {
                     username = jwtCore.getNameFromJwt(jwt);
                 } catch (ExpiredJwtException e) {
-                    //TODO
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
                 }
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                     userDetails = userDetailsService.loadUserByUsername(username);

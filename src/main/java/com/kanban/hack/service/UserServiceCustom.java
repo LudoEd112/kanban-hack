@@ -1,5 +1,6 @@
 package com.kanban.hack.service;
 
+import com.kanban.hack.UserDetailsImpl;
 import com.kanban.hack.model.User;
 import com.kanban.hack.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class UserServiceCustom implements org.springframework.security.core.user
         User user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
                 String.format("User '%s' not found", username)
         ));
-        return null;
+        return UserDetailsImpl.build(user);
+    }
+
+    public void save(User user){
+        userRepository.save(user); //реализовали метод внедренного бина
     }
 }

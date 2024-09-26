@@ -3,6 +3,7 @@ package com.kanban.hack.controller;
 import com.kanban.hack.JwtCore;
 import com.kanban.hack.model.User;
 import com.kanban.hack.repository.UserRepository;
+import com.kanban.hack.service.UserServiceCustom;
 import com.kanban.hack.viewmodel.LoginUser;
 import com.kanban.hack.viewmodel.UserVM;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
-    //private UserService userService;
+    private UserServiceCustom userService;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
@@ -49,6 +50,10 @@ public class AuthController {
     @Autowired
     public void setJwtCore(JwtCore jwtCore){
         this.jwtCore = jwtCore;
+    }
+    @Autowired
+    public void setUserService(UserServiceCustom userService){
+        this.userService = userService;
     }
 
     /*@PostMapping("/register")
@@ -81,7 +86,7 @@ public class AuthController {
         user.setUsername(userVM.getUsername());
         user.setEmail(userVM.getEmail());
         user.setPassword(hashed);
-        userRepository.save(user);
+        userService.save(user);
         return ResponseEntity.ok("Success");
 
         /*try {
@@ -102,6 +107,8 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody LoginUser loginUser) {
         Authentication authentication = null;
         try {
+            System.out.println("Username: " + loginUser.getUsername());
+            System.out.println("Password: " + loginUser.getPassword());
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
 
         } catch (BadCredentialsException e) {
