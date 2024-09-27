@@ -1,2 +1,2 @@
-# kanban
-Projeto kanban backend
+# kanban-hackathon
+Project kanban backend

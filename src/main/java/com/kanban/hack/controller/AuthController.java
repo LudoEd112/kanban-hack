@@ -82,7 +82,6 @@ public class AuthController {
         String hashed = passwordEncoder.encode(userVM.getPassword());
 
         User user = new User();
-        user.setId(userVM.getId());
         user.setUsername(userVM.getUsername());
         user.setEmail(userVM.getEmail());
         user.setPassword(hashed);
@@ -107,16 +106,12 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody LoginUser loginUser) {
         Authentication authentication;
         try {
-            System.out.println("Username: " + loginUser.getUsername());
-            System.out.println("Password: " + loginUser.getPassword());
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
 
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("Username: " + loginUser.getUsername());
-        System.out.println("Password: " + loginUser.getPassword());
         String jwt = jwtCore.generateToken(authentication);
         return ResponseEntity.ok(jwt);
        /* try {
