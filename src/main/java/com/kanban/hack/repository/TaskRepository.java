@@ -11,7 +11,7 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllBySprintIdAndStatusIn(Long sprintId, List<Status> activeStatusList);
-    List<Task> findAllByBoardIdAndStatus(Long boardId, Status status);
+    List<Task> findAllByProjectIdAndStatus(Long projectId, Status status);
 
 }
 

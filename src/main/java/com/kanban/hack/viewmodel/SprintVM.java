@@ -16,6 +16,6 @@ public class SprintVM {
     private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Long boardId;
+    private Long projectId;
 
 }

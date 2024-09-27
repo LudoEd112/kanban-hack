@@ -20,7 +20,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
     @ManyToOne
-    private Board board;
+    private Project project;
     @ManyToOne
     private Sprint sprint;
     @ManyToOne

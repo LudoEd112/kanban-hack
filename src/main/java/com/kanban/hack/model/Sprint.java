@@ -18,5 +18,5 @@ public class Sprint {
     @Column
     private LocalDate endDate;
     @ManyToOne
-    private Board board;
+    private Project project;
 }

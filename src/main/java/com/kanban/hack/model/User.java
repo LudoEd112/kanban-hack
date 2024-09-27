@@ -5,6 +5,9 @@ import lombok.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -21,4 +24,11 @@ public class User {
     private String password;
     @Column
     private String email;
+
+    @ManyToMany
+    @JoinTable(name = "user_project",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private Set<Project> assignedProjects = new HashSet<>();
 }

@@ -1,24 +1,18 @@
 package com.kanban.hack.viewmodel;
 
 import com.kanban.hack.model.Status;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class TaskVM {
 
     private Long id;
     private String title;
     private LocalDate date;
     private Status status;
-    private Long boardId;
+    private Long projectId;
     private Long sprintId;
     private Long ownerId;
 

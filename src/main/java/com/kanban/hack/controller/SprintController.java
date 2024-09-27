@@ -30,17 +30,17 @@ public class SprintController {
         sprintService.create(sprintVM);
     }
 
-    @GetMapping("/board/{boardId}")
-    @Operation(summary = "Get sprint", description = "Get sprint by boardId")
-    public List<SprintVM> listByBoard(@PathVariable Long boardId) {
-        List<Sprint> sprints = sprintService.listByBoard(boardId);
+    @GetMapping("/project/{projectId}")
+    @Operation(summary = "Get sprint", description = "Get sprint by projectId")
+    public List<SprintVM> listByProject(@PathVariable Long projectId) {
+        List<Sprint> sprints = sprintService.listByProject(projectId);
 
         List<SprintVM> sprintVMS = sprints.stream().map(sprint -> {
             SprintVM sprintVM = new SprintVM();
             sprintVM.setId(sprint.getId());
             sprintVM.setStartDate(sprint.getStartDate());
             sprintVM.setEndDate(sprint.getEndDate());
-            sprintVM.setBoardId(sprint.getBoard().getId());
+            sprintVM.setProjectId(sprint.getProject().getId());
             return sprintVM;
         }).collect(Collectors.toList());
 

@@ -1,11 +1,11 @@
 package com.kanban.hack.service;
 
-import com.kanban.hack.model.Board;
+import com.kanban.hack.model.Project;
 import com.kanban.hack.model.Sprint;
 import com.kanban.hack.model.Status;
 import com.kanban.hack.model.Task;
 import com.kanban.hack.model.User;
-import com.kanban.hack.repository.BoardRepository;
+import com.kanban.hack.repository.ProjectRepository;
 import com.kanban.hack.repository.SprintRepository;
 import com.kanban.hack.repository.TaskRepository;
 import com.kanban.hack.repository.UserRepository;
@@ -25,7 +25,7 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     @Autowired
-    private BoardRepository boardRepository;
+    private ProjectRepository projectRepository;
 
     @Autowired
     private SprintRepository sprintRepository;
@@ -39,8 +39,8 @@ public class TaskService {
         taskToSave.setDate(taskVM.getDate());
         taskToSave.setStatus(taskVM.getStatus());
 
-        Board savedBoard = boardRepository.findById(taskVM.getBoardId()).get();
-        taskToSave.setBoard(savedBoard);
+        Project savedProject = projectRepository.findById(taskVM.getProjectId()).get();
+        taskToSave.setProject(savedProject);
 
         Sprint savedSprint = sprintRepository.findById(taskVM.getSprintId()).get();
         taskToSave.setSprint(savedSprint);
@@ -76,13 +76,13 @@ public class TaskService {
         }
     }
 
-    public List<Task> listByBoard(Long boardId) {
-        Optional<Board> board = boardRepository.findById(boardId);
+    /*public List<Task> listByBoard(Long boardId) {
+        Optional<Project> board = boardRepository.findById(boardId);
         if (board.isPresent()) {
             return taskRepository.findAllByBoardIdAndStatus(boardId, Status.BACKLOG);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
 }

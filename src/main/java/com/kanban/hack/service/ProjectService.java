@@ -1,8 +1,8 @@
 package com.kanban.hack.service;
 
-import com.kanban.hack.model.Board;
-import com.kanban.hack.repository.BoardRepository;
-import com.kanban.hack.viewmodel.BoardVM;
+import com.kanban.hack.model.Project;
+import com.kanban.hack.repository.ProjectRepository;
+import com.kanban.hack.viewmodel.ProjectVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BoardService {
+public class ProjectService {
 
     @Autowired
-    private BoardRepository boardRepository;
+    private ProjectRepository projectRepository;
 
-    public void create(BoardVM boardVM) {
-        Board boardToSave = new Board();
-        boardToSave.setTitle(boardVM.getTitle());
-        boardRepository.save(boardToSave);
+    public void create(ProjectVM projectVM) {
+        Project projectToSave = new Project();
+        projectToSave.setTitle(projectVM.getTitle());
+        projectRepository.save(projectToSave);
     }
 
     /*public List<Board> findByBoardId(Long boardId){
@@ -32,9 +32,9 @@ public class BoardService {
         }
     }*/
 
-    public List<Board> listBoards() {
-        List<Board> result = new ArrayList<>();
-        boardRepository.findAll().iterator().forEachRemaining(result::add);
+    public List<Project> listProjects() {
+        List<Project> result = new ArrayList<>();
+        projectRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }
 }

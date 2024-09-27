@@ -43,7 +43,7 @@ public class TaskController {
             taskVM.setTitle(task.getTitle());
             taskVM.setDate(task.getDate());
             taskVM.setStatus(task.getStatus());
-            taskVM.setBoardId(task.getBoard().getId());
+            taskVM.setProjectId(task.getProject().getId());
             taskVM.setSprintId(task.getSprint().getId());
             //taskVM.setOwnerId(task.getOwner().getId());
             return taskVM;

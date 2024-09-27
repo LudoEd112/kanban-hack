@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoardVM {
+public class ProjectVM {
 
     private Long id;
     private String title;
