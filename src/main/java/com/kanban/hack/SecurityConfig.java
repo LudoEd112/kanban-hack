@@ -98,7 +98,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_WHITE_LIST).permitAll()
-                        .requestMatchers("/v1/secured/user").fullyAuthenticated()
+                        .requestMatchers("/v1/secured/user").authenticated()
                         .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider())
