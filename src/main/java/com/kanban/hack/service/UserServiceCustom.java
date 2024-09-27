@@ -5,6 +5,7 @@ import com.kanban.hack.model.User;
 import com.kanban.hack.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class UserServiceCustom implements org.springframework.security.core.user
                 String.format("User '%s' not found", username)
         ));
         return UserDetailsImpl.build(user);
+    }
+
+    public UserDetailsService userDetailsService() {
+        return this::loadUserByUsername;
     }
 
     public void save(User user){

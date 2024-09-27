@@ -105,7 +105,7 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Login User")
     public ResponseEntity<String> login(@RequestBody LoginUser loginUser) {
-        Authentication authentication = null;
+        Authentication authentication;
         try {
             System.out.println("Username: " + loginUser.getUsername());
             System.out.println("Password: " + loginUser.getPassword());
@@ -115,6 +115,8 @@ public class AuthController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("Username: " + loginUser.getUsername());
+        System.out.println("Password: " + loginUser.getPassword());
         String jwt = jwtCore.generateToken(authentication);
         return ResponseEntity.ok(jwt);
        /* try {
