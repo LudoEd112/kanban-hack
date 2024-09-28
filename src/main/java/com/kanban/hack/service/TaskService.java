@@ -1,10 +1,8 @@
 package com.kanban.hack.service;
 
 import com.kanban.hack.model.Project;
-import com.kanban.hack.model.Sprint;
 import com.kanban.hack.model.Status;
 import com.kanban.hack.model.Task;
-import com.kanban.hack.model.User;
 import com.kanban.hack.repository.ProjectRepository;
 import com.kanban.hack.repository.SprintRepository;
 import com.kanban.hack.repository.TaskRepository;
@@ -18,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -34,14 +33,14 @@ public class TaskService {
     @Autowired
     private UserRepository userRepository;
 
-    public Task create(TaskVM taskVM) {
+    public Task create(Task task) {
         Task taskToSave = new Task();
-        taskToSave.setTitle(taskVM.getTitle());
-        taskToSave.setId(taskVM.getId());
-        taskToSave.setCreatorId(taskVM.getCreatorId());
-        taskToSave.setDescription(taskVM.getDescription());
-        taskToSave.setProjectId(taskVM.getProjectId());
-        taskToSave.setStatus(taskVM.getStatus());
+        taskToSave.setTitle(task.getTitle());
+        taskToSave.setId(task.getId());
+        taskToSave.setCreatorId(task.getCreatorId());
+        taskToSave.setDescription(task.getDescription());
+        taskToSave.setProjectId(task.getProjectId());
+        taskToSave.setStatus(task.getStatus());
         //Project savedProject = projectRepository.findById(taskVM.getProjectId()).get();
         //taskToSave.setProject(savedProject);
         return taskRepository.save(taskToSave);
@@ -72,10 +71,45 @@ public class TaskService {
         }
     }
 
-    public List<Task> getAllTasks(Long taskId) {
-        List<Task> result = new ArrayList<>();
+    public List<Task> getAllTasksByProjectId(Long projectId) {
+        return taskRepository.findAllByProjectId(projectId);
+
+        /*List<Task> result = new ArrayList<>();
         taskRepository.findAll().iterator().forEachRemaining(result::add);
-        return result;
+        List<Task> projectVMS = result.stream().map(temp -> {
+            Task obj = new Task();
+            obj.setProjectId(temp.getProjectId());
+            obj.setCreatorId(temp.getCreatorId());
+            obj.setTitle(temp.getTitle());
+            obj.setDescription(temp.getDescription());
+            obj.setStatus(temp.getStatus());
+            return obj;
+        }).collect(Collectors.toList());
+        return result;*/
+    }
+
+    public Task getTaskByTaskId(Long taskId) {
+        return taskRepository.findById(taskId).get();
+    }
+
+    public Task updateTask(Long taskId, Task updatedTask) {
+        Task task = taskRepository.findById(taskId).get();
+        if (updatedTask.getId() != null){
+            task.setId(updatedTask.getId());
+        }
+        if (updatedTask.getProjectId() != null){
+            task.setProjectId(updatedTask.getProjectId());
+        }
+        if (updatedTask.getCreatorId() != null){
+            task.setCreatorId(updatedTask.getCreatorId());
+        }
+        if (updatedTask.getTitle() != null){
+            task.setTitle(updatedTask.getTitle());
+        }
+        if (updatedTask.getStatus() != null){
+            task.setStatus(updatedTask.getStatus());
+        }
+        return taskRepository.save(task);
     }
 
     /*public List<Task> listByBoard(Long boardId) {

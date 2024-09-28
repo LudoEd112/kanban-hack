@@ -38,12 +38,12 @@ dependencies {
 	compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2:2.2.224'
+	//runtimeOnly 'com.h2database:h2:2.2.224'
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-	//implementation 'org.postgresql:postgresql:42.7.3'
+	implementation 'org.postgresql:postgresql:42.7.3'
 
 
 	// Swagger dependencies

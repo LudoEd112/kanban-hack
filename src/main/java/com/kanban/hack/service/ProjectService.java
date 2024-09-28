@@ -60,8 +60,7 @@ public class ProjectService {
         if (updatedProject.getDescription() != null){
             project.setDescription(updatedProject.getDescription());
         }
-        projectRepository.save(project);
-        return project;
+        return projectRepository.save(project);
     }
 
     public void deleteProject(Long projectId) {
