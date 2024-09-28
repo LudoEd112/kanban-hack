@@ -24,11 +24,11 @@ public class ProjectService {
     @Autowired
     private UserRepository userRepository;
 
-    public void create(ProjectVM projectVM) {
+    public Project create(ProjectVM projectVM) {
         Project projectToSave = new Project();
         projectToSave.setTitle(projectVM.getTitle());
         projectToSave.setDescription(projectVM.getDescription());
-        projectRepository.save(projectToSave);
+        return projectRepository.save(projectToSave);
     }
 
     /*public List<Board> findByBoardId(Long boardId){
@@ -47,6 +47,31 @@ public class ProjectService {
         projectRepository.findAll().iterator().forEachRemaining(result::add);
         return result;
     }
+
+    public Project updateProject(Long projectId, Project updatedProject) {
+        Project project = projectRepository.findById(projectId).get();
+        if (updatedProject.getId() != null){
+            project.setId(updatedProject.getId());
+        }
+        if (updatedProject.getTitle() != null){
+            project.setTitle(updatedProject.getTitle());
+        }
+        if (updatedProject.getDescription() != null){
+            project.setDescription(updatedProject.getDescription());
+        }
+        projectRepository.save(project);
+        return project;
+    }
+
+    public void deleteProject(Long projectId) {
+        Project project = projectRepository.findById(projectId).get();
+        projectRepository.delete(project);
+    }
+
+    public Project getProjectByProjectId(Long projectId) {
+        return projectRepository.findById(projectId).get();
+    }
+
 
    /* public List<Project> listProjects(User user) {
         Optional<User> userFromRM = userRepository.findById(user.getId());

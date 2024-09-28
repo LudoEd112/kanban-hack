@@ -1,6 +1,7 @@
 package com.kanban.hack.controller;
 
 import com.kanban.hack.model.User;
+import com.kanban.hack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,23 +17,24 @@ public class MainController {
     private AuthController authController;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
     public void setAuthController(AuthController authController) {
         this.authController = authController;
     }
 
     @GetMapping("/me")
     public User userAccess(Principal principal){
+        User userFromLogin = authController.getAuthorisedUser();
         if (principal == null)
             return null;
-        if (!principal.getName().equals(authController.getAuthorisedUser().getUsername())){
-            return null;
-        }
-        User userFromLogin = authController.getAuthorisedUser();
-        User userWithoutPassword = new User();
-        userWithoutPassword.setId(userFromLogin.getId());
-        userWithoutPassword.setUsername(userFromLogin.getUsername());
-        userWithoutPassword.setEmail(userFromLogin.getEmail());
-        return userWithoutPassword;
+        return userService.securedMe(principal);
     }
 
 

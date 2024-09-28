@@ -8,11 +8,7 @@ import com.kanban.hack.viewmodel.ProjectVM;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,8 +34,8 @@ public class ProjectController {
 
     @PostMapping
     @Operation(summary = "Create new project", description = "Creating new project")
-    public void create(@RequestBody ProjectVM projectVM) {
-        projectService.create(projectVM);
+    public Project create(@RequestBody ProjectVM projectVM) {
+        return projectService.create(projectVM);
     }
 
     @GetMapping
@@ -61,6 +57,25 @@ public class ProjectController {
 
         return projectVMS;
     }
+
+    @PatchMapping("/{projectId}")
+    @Operation(summary = "Patch projects", description = "change some projects fields")
+    public Project updateProject(@PathVariable Long projectId, @RequestBody Project project){
+        return projectService.updateProject(projectId, project);
+    }
+
+    @DeleteMapping("/{projectId}")
+    @Operation(summary = "Delete project", description = "delete project by projectId")
+    public void deleteProject(@PathVariable Long projectId){
+        projectService.deleteProject(projectId);
+    }
+
+    @GetMapping("/{projectId}")
+    @Operation(summary = "Get project by id", description = "get project by id")
+    public Project getProjectByProjectId(@PathVariable Long projectId){
+        return projectService.getProjectByProjectId(projectId);
+    }
+
 
     /*@GetMapping("/boardByUserId/{user}")
     public List<ProjectVM> boardsByUserId(@PathVariable User user) {

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.Set;
 
 @Service
@@ -41,6 +42,17 @@ public class UserService implements org.springframework.security.core.userdetail
 
     public UserDetailsService userDetailsService() {
         return this::loadUserByUsername;
+    }
+
+    public User securedMe (Principal principal){
+        String principalName = principal.getName();
+        User loginUser = userRepository.findUserByUsername(principalName).get();
+        User userWithoutPassword = new User();
+        userWithoutPassword.setId(loginUser.getId());
+        userWithoutPassword.setUsername(loginUser.getUsername());
+        userWithoutPassword.setEmail(loginUser.getEmail());
+        userWithoutPassword.setAssignedProjects(loginUser.getAssignedProjects());
+        return userWithoutPassword;
     }
 
     public void save(User user){
