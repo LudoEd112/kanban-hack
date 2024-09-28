@@ -31,6 +31,12 @@ public class TaskController {
         return taskService.getAllTasksByProjectId(projectId);
     }
 
+    @GetMapping("/projects/{projectId}/tasks/{status}")
+    @Operation(summary = "Get tasks", description = "Get all tasks by projectId and status")
+    public List<Task> getAllTasksByProjectIdAndStatus(@PathVariable Long projectId, @PathVariable Status status){
+        return taskService.getAllTasksByProjectIdAndStatus(projectId,status);
+    }
+
     @GetMapping("/{taskId}")
     @Operation(summary = "Get task", description = "get task by id")
     public Task getTaskByTaskId(@PathVariable Long taskId){
@@ -41,6 +47,18 @@ public class TaskController {
     @Operation(summary = "update task", description = "Update task by taskId")
     public Task updateTask(@PathVariable Long taskId, @RequestBody Task task){
         return taskService.updateTask(taskId, task);
+    }
+
+    @DeleteMapping("/{taskId}")
+    @Operation(summary = "delete task", description = "Delete task by taskId")
+    public void deleteTask(@PathVariable Long taskId){
+        taskService.deleteTask(taskId);
+    }
+
+    @GetMapping("/status/{status}")
+    @Operation(summary = "Get task by status", description = "Get All tasks by status")
+    public List<Task> getAllTasksByStatus(@PathVariable Status status){
+        return taskService.getAllTasksByStatus(status);
     }
 
     /*@PutMapping("/{taskId}/move/{newStatus}")

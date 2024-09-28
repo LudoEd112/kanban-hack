@@ -88,6 +88,23 @@ public class TaskService {
         return result;*/
     }
 
+    public List<Task> getAllTasksByProjectIdAndStatus(Long projectId, Status status) {
+        return taskRepository.findAllByProjectIdAndStatus(projectId, status);
+
+        /*List<Task> result = new ArrayList<>();
+        taskRepository.findAll().iterator().forEachRemaining(result::add);
+        List<Task> projectVMS = result.stream().map(temp -> {
+            Task obj = new Task();
+            obj.setProjectId(temp.getProjectId());
+            obj.setCreatorId(temp.getCreatorId());
+            obj.setTitle(temp.getTitle());
+            obj.setDescription(temp.getDescription());
+            obj.setStatus(temp.getStatus());
+            return obj;
+        }).collect(Collectors.toList());
+        return result;*/
+    }
+
     public Task getTaskByTaskId(Long taskId) {
         return taskRepository.findById(taskId).get();
     }
@@ -110,6 +127,15 @@ public class TaskService {
             task.setStatus(updatedTask.getStatus());
         }
         return taskRepository.save(task);
+    }
+
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
+    }
+
+    public List<Task> getAllTasksByStatus(Status status) {
+        List<Task> tasks = taskRepository.findAllByStatus(status);
+        return tasks;
     }
 
     /*public List<Task> listByBoard(Long boardId) {
