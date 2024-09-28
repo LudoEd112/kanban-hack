@@ -1,64 +1,59 @@
-/*
 package com.kanban.hack.service;
 
+import com.kanban.hack.UserDetailsImpl;
+import com.kanban.hack.model.Project;
 import com.kanban.hack.model.User;
+import com.kanban.hack.repository.ProjectRepository;
 import com.kanban.hack.repository.UserRepository;
-import com.kanban.hack.viewmodel.UserVM;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 @Service
-public class UserService {
-
+public class UserService implements org.springframework.security.core.userdetails.UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public void create(UserVM userVM) {
-        User userToSave = new User();
-        userToSave.setUsername(userVM.getUsername());
-        userToSave.setPassword(userVM.getPassword());
-        userToSave.setId(userVM.getId());
-        userRepository.save(userToSave);
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    private static final long JWT_EXPIRATION_TIME = 86400000; // 1 день
-    private static final String JWT_SECRET = "your_secret_key"; // Замените на ваш секретный ключ
-
-    public boolean login(String username, String password) {
-        User user = userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Сравниваем  закодированный  пароль  с  паролем  из  базы  данных
-        return passwordEncoder.matches(password, user.getPassword());
+    public void setProjectRepository(ProjectRepository projectRepository){
+        this.projectRepository = projectRepository;
     }
 
-    public String generateToken(String username) {
-        //  Создаем  заголовки  JWT
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("typ", "JWT");
-        headers.put("alg", "HS512");
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException(
+                String.format("User '%s' not found", username)
+        ));
+        return UserDetailsImpl.build(user);
+    }
 
-        //  Создаем  тело  JWT
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("sub", username);
-        claims.put("iat", new Date().getTime());
-        claims.put("exp", new Date().getTime() + JWT_EXPIRATION_TIME);
+    public UserDetailsService userDetailsService() {
+        return this::loadUserByUsername;
+    }
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setHeader(headers)
-                .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
-                .compact();
+    public void save(User user){
+        userRepository.save(user); //реализовали метод внедренного бина
+    }
+
+    public User assignProjectToUser(Long userId, Long projectId) {
+        Set<Project> projectSet = null;
+        User user = userRepository.findById(userId).get();
+        Project project = projectRepository.findById(projectId).get();
+        projectSet = user.getAssignedProjects();
+        projectSet.add(project);
+        user.setAssignedProjects(projectSet);
+        return userRepository.save(user);
     }
 }
-*/

@@ -1,6 +1,7 @@
 package com.kanban.hack.controller;
 
 import com.kanban.hack.model.Project;
+import com.kanban.hack.model.User;
 import com.kanban.hack.service.ProjectService;
 import com.kanban.hack.service.TaskService;
 import com.kanban.hack.viewmodel.ProjectVM;
@@ -22,6 +23,14 @@ import java.util.stream.Collectors;
 public class ProjectController {
 
     @Autowired
+    private AuthController authController;
+
+    @Autowired
+    public void setAuthController(AuthController authController) {
+        this.authController = authController;
+    }
+
+    @Autowired
     private ProjectService projectService;
 
     @Autowired
@@ -36,6 +45,10 @@ public class ProjectController {
     @GetMapping
     @Operation(summary = "Projects", description = "Get all projects")
     public List<ProjectVM> list() {
+        User user = authController.getAuthorisedUser();
+        if (user == null){
+            return null;
+        }
         List<Project> projects = projectService.listProjects();
 
         List<ProjectVM> projectVMS = projects.stream().map(temp -> {

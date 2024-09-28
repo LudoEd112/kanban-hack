@@ -1,5 +1,6 @@
 package com.kanban.hack.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,8 +19,8 @@ public class Project {
     private String title;
     @Column
     private String description;
-    
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "assignedProjects")
     private Set<User> usersSet = new HashSet<>();
 }

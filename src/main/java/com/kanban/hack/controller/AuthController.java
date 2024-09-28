@@ -6,7 +6,7 @@ import com.kanban.hack.RefreshJwtRequest;
 import com.kanban.hack.UserDetailsImpl;
 import com.kanban.hack.model.User;
 import com.kanban.hack.repository.UserRepository;
-import com.kanban.hack.service.UserServiceCustom;
+import com.kanban.hack.service.UserService;
 import com.kanban.hack.viewmodel.LoginUser;
 import com.kanban.hack.viewmodel.UserVM;
 import io.jsonwebtoken.Claims;
@@ -34,7 +34,7 @@ import java.util.Map;
 public class AuthController {
 
     @Autowired
-    private UserServiceCustom userService;
+    private UserService userService;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
@@ -75,7 +75,7 @@ public class AuthController {
         this.jwtCore = jwtCore;
     }
     @Autowired
-    public void setUserService(UserServiceCustom userService){
+    public void setUserService(UserService userService){
         this.userService = userService;
     }
 

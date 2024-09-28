@@ -1,15 +1,13 @@
 package com.kanban.hack;
 
-import com.kanban.hack.service.UserServiceCustom;
+import com.kanban.hack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,17 +37,18 @@ public class SecurityConfig {
            "/h2/**",
            "/console/**",
            "/v1/auth/**",
+           "/v1/users/**",
            "/swagger-ui.html"
    };
 
     private TokenFilter tokenFilter;
-    private UserServiceCustom userServiceCustom;
+    private UserService userService;
 
     public SecurityConfig() {}
 
     @Autowired
-    public void setUserServiceCustom(UserServiceCustom userServiceCustom){
-        this.userServiceCustom = userServiceCustom;
+    public void setUserServiceCustom(UserService userService){
+        this.userService = userService;
     }
     @Autowired
     public void setTokenFilter(TokenFilter tokenFilter){
@@ -70,7 +69,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userServiceCustom.userDetailsService());
+        authProvider.setUserDetailsService(userService.userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

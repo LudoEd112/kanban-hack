@@ -27,6 +27,13 @@ public class MainController {
         if (!principal.getName().equals(authController.getAuthorisedUser().getUsername())){
             return null;
         }
-        return authController.getAuthorisedUser();
+        User userFromLogin = authController.getAuthorisedUser();
+        User userWithoutPassword = new User();
+        userWithoutPassword.setId(userFromLogin.getId());
+        userWithoutPassword.setUsername(userFromLogin.getUsername());
+        userWithoutPassword.setEmail(userFromLogin.getEmail());
+        return userWithoutPassword;
     }
+
+
 }
