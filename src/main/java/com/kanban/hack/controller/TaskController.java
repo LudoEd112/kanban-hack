@@ -2,6 +2,7 @@ package com.kanban.hack.controller;
 
 import com.kanban.hack.model.Status;
 import com.kanban.hack.model.Task;
+import com.kanban.hack.repository.TaskRepository;
 import com.kanban.hack.service.TaskService;
 import com.kanban.hack.viewmodel.TaskVM;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,11 +29,11 @@ public class TaskController {
 
     @PostMapping
     @Operation(summary = "Create", description = "Create new task")
-    public void create(@RequestBody TaskVM taskVM) {
-        taskService.create(taskVM);
+    public Task create(@RequestBody TaskVM taskVM) {
+        return taskService.create(taskVM);
     }
 
-    @GetMapping("/sprint/{sprintId}")
+    /*@GetMapping("/sprint/{sprintId}")
     @Operation(summary = "Find tasks", description = "Find tasks by sprintId")
     public List<TaskVM> listByTask(@PathVariable Long sprintId) {
         List<Task> tasks = taskService.listBySprint(sprintId);
@@ -41,16 +42,13 @@ public class TaskController {
             TaskVM taskVM = new TaskVM();
             taskVM.setId(task.getId());
             taskVM.setTitle(task.getTitle());
-            taskVM.setDate(task.getDate());
             taskVM.setStatus(task.getStatus());
             taskVM.setProjectId(task.getProject().getId());
-            taskVM.setSprintId(task.getSprint().getId());
-            //taskVM.setOwnerId(task.getOwner().getId());
             return taskVM;
         }).collect(Collectors.toList());
 
         return taskVMS;
-    }
+    }*/
 
     @PutMapping("/{taskId}/move/{newStatus}")
     @Operation(summary = "changeStatus", description = "change status of task")

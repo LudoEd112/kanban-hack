@@ -33,25 +33,20 @@ public class TaskService {
     @Autowired
     private UserRepository userRepository;
 
-    public void create(TaskVM taskVM) {
+    public Task create(TaskVM taskVM) {
         Task taskToSave = new Task();
         taskToSave.setTitle(taskVM.getTitle());
-        taskToSave.setDate(taskVM.getDate());
+        taskToSave.setId(taskVM.getId());
+        taskToSave.setCreatorId(taskVM.getCreatorId());
+        taskToSave.setDescription(taskVM.getDescription());
+        taskToSave.setProjectId(taskVM.getProjectId());
         taskToSave.setStatus(taskVM.getStatus());
-
-        Project savedProject = projectRepository.findById(taskVM.getProjectId()).get();
-        taskToSave.setProject(savedProject);
-
-        Sprint savedSprint = sprintRepository.findById(taskVM.getSprintId()).get();
-        taskToSave.setSprint(savedSprint);
-
-        User savedUser = userRepository.findById(taskVM.getOwnerId()).get();
-        taskToSave.setOwner(savedUser);
-
-        taskRepository.save(taskToSave);
+        //Project savedProject = projectRepository.findById(taskVM.getProjectId()).get();
+        //taskToSave.setProject(savedProject);
+        return taskRepository.save(taskToSave);
     }
 
-    public List<Task> listBySprint(Long sprintId) {
+    /*public List<Task> listBySprint(Long sprintId) {
         Optional<Sprint> sprint = sprintRepository.findById(sprintId);
         if (sprint.isPresent()) {
             List<Status> activeStatusList = List.of(Status.TODO, Status.DOING, Status.DONE);
@@ -61,7 +56,7 @@ public class TaskService {
                     HttpStatus.NOT_FOUND
             );
         }
-    }
+    }*/
 
     public void moveTask(Long taskId, Status newStatus) {
         Optional<Task> task = taskRepository.findById(taskId);

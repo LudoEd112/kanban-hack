@@ -14,15 +14,25 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    private Long projectId;
+    @Column
+    private Long creatorId;
+    @Column
     private String title;
     @Column
-    private LocalDate date;
+    private String description;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @ManyToOne
+
+   /* @ManyToOne
+    @JoinColumn(name = "projects_id")
+    public Project project;*/
+    /*@Column
+    private LocalDate date;*/
+    /*@ManyToOne
     private Project project;
     @ManyToOne
     private Sprint sprint;
     @ManyToOne
-    private User owner;
+    private User owner;*/
 }

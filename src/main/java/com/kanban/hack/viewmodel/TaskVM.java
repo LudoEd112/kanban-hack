@@ -9,11 +9,11 @@ import java.time.LocalDate;
 public class TaskVM {
 
     private Long id;
-    private String title;
-    private LocalDate date;
-    private Status status;
     private Long projectId;
-    private Long sprintId;
-    private Long ownerId;
+    private Long creatorId;
+    private String title;
+    private String description;
+    private Status status;
+
 
 }
