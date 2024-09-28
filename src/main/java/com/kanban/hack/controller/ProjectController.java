@@ -34,8 +34,8 @@ public class ProjectController {
 
     @PostMapping
     @Operation(summary = "Create new project", description = "Creating new project")
-    public Project create(@RequestBody ProjectVM projectVM) {
-        return projectService.create(projectVM);
+    public Project create(@RequestBody Project project) {
+        return projectService.create(project);
     }
 
     @GetMapping

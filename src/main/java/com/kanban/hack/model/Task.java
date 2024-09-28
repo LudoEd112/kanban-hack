@@ -24,7 +24,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-   /* @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "projects_id")
     public Project project;*/
     /*@Column

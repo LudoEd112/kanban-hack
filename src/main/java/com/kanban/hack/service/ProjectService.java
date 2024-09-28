@@ -24,10 +24,11 @@ public class ProjectService {
     @Autowired
     private UserRepository userRepository;
 
-    public Project create(ProjectVM projectVM) {
+    public Project create(Project project) {
         Project projectToSave = new Project();
-        projectToSave.setTitle(projectVM.getTitle());
-        projectToSave.setDescription(projectVM.getDescription());
+        projectToSave.setTitle(project.getTitle());
+        projectToSave.setDescription(project.getDescription());
+        projectToSave.setTask(project.getTask());
         return projectRepository.save(projectToSave);
     }
 

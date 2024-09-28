@@ -2,6 +2,7 @@ package com.kanban.hack.controller;
 
 import com.kanban.hack.model.Status;
 import com.kanban.hack.model.Task;
+import com.kanban.hack.model.User;
 import com.kanban.hack.repository.TaskRepository;
 import com.kanban.hack.service.TaskService;
 import com.kanban.hack.viewmodel.TaskVM;
@@ -49,6 +50,12 @@ public class TaskController {
 
         return taskVMS;
     }*/
+
+    @GetMapping("/{taskId}")
+    @Operation(summary = "Get tasks", description = "Get all tasks by Id")
+    public List<Task> getAllTasks(@PathVariable Long taskId){
+        return taskService.getAllTasks(taskId);
+    }
 
     @PutMapping("/{taskId}/move/{newStatus}")
     @Operation(summary = "changeStatus", description = "change status of task")

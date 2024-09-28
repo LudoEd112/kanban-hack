@@ -4,6 +4,7 @@ import com.kanban.hack.JwtCore;
 import com.kanban.hack.JwtResponse;
 import com.kanban.hack.RefreshJwtRequest;
 import com.kanban.hack.UserDetailsImpl;
+import com.kanban.hack.exception.UnauthorizedException;
 import com.kanban.hack.model.User;
 import com.kanban.hack.repository.UserRepository;
 import com.kanban.hack.service.UserService;
@@ -126,13 +127,13 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Login", description = "Login User")
-    public JwtResponse  login(@RequestBody LoginUser loginUser) {
+    public JwtResponse login(@RequestBody LoginUser loginUser) {
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUser.getUsername(), loginUser.getPassword()));
 
         } catch (BadCredentialsException e) {
-            return new JwtResponse(null, null);
+            throw new UnauthorizedException("unauthorized message");
         }
         User user = new User();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();

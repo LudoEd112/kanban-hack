@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,6 +70,12 @@ public class TaskService {
                     HttpStatus.NOT_FOUND
             );
         }
+    }
+
+    public List<Task> getAllTasks(Long taskId) {
+        List<Task> result = new ArrayList<>();
+        taskRepository.findAll().iterator().forEachRemaining(result::add);
+        return result;
     }
 
     /*public List<Task> listByBoard(Long boardId) {
