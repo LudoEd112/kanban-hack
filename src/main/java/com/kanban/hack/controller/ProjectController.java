@@ -55,6 +55,7 @@ public class ProjectController {
             ProjectVM obj = new ProjectVM();
             obj.setId(temp.getId());
             obj.setTitle(temp.getTitle());
+            obj.setDescription(temp.getDescription());
             return obj;
         }).collect(Collectors.toList());
 
